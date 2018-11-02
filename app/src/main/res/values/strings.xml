@@ -1,4 +1,42 @@
 <resources>
     <string name="app_name">InventoryApp</string>
     <string name="insert_data">Insert Data</string>
+    <string name="book_name_hint_resource">Book Name</string>
+    <string name="author_hint_resource">author</string>
+    <string name="price_hint_resource">price</string>
+    <string name="quantity_available_text">0</string>
+    <string name="order_button_text">Order Item</string>
+    <string name="image_content_description">Image Displayed Here</string>
+    <string name="editor_activity_title_add_item">Add an Item</string>
+    <string name="editor_activity_title_edit_pet">Edit Item</string>
+    <string name="book_name_edit_text">Book Name</string>
+    <string name="supplier_name_edit_text">Supplier Name</string>
+    <string name="quantity_edit_text">Quantity</string>
+    <string name="increase_level">+</string>
+    <string name="decrease_level">-</string>
+    <string name="price_for_single_quantity_edit_text">Price For Single Quantity</string>
+    <string name="supplier_phone_number_edit">Supplier Phone Number</string>
+    <string name="adding_entry_button_text">Add The Entry</string>
+    <string name="updating_entry_button_text">Update The Entry</string>
+    <string name="failed_inserting_book">Inserting the Book Failed</string>
+    <string name="insert_book_successful">Inserting Book Successful</string>
+    <string name="update_book_failed">Updating Inventory failed</string>
+    <string name="update_book_success">Update was successful</string>
+    <string name="click_the_add_button_to_add_items">Click the Add Button To Add Items</string>
+    <string name="rupees_syntax">Rs.</string>
+    <string name="available_button_text">- Available</string>
+    <string name="unavailable_text">Book currently Unavailable</string>
+    <string name="delete_menu_text">Delete</string>
+    <string name="edit_menu_text">Edit</string>
+    <string name="supplier_name_display_text">Supplier Name</string>
+    <string name="delete_dialog_message">Do you really want to delete this?</string>
+    <string name="delete_message">delete</string>
+    <string name="cancel_message">Cancel</string>
+    <string name="delete_message_failed_toast_message">Delete Book Failed</string>
+    <string name="delete_book_successful_toast_msg">Delete Book Successful</string>
+    <string name="enter_book_name_error_msg">Please enter the Book Name</string>
+    <string name="enter_supplier_name_error_msg">Please enter the SupplierName</string>
+    <string name="enter_price_error_msg">Enter The Price Of The Book</string>
+    <string name="enter_phne_number_error_msg">Enter 10 Digit Phone Number</string>
+
 </resources>

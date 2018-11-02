@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/eight_dp"
+        android:background="@color/colorPrimary"
+        app:cardCornerRadius="@dimen/five_dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/book_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/book_name_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/sixteen_dp"
+                    android:hint="@string/book_name_hint_resource"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/twenty_five_sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/author_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/sixteen_dp"
+                    android:hint="@string/author_hint_resource"
+                    android:textColor="@color/light_green"
+                    android:textSize="@dimen/eighteen_sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/price_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="@dimen/sixteen_dp"
+                android:layout_marginEnd="@dimen/sixteen_dp"
+                android:layout_toEndOf="@+id/book_info"
+                android:gravity="end"
+                android:hint="@string/price_hint_resource"
+                android:textColor="@color/red"
+                android:textSize="@dimen/twenty_five_sp" />
+
+
+            <Button
+                android:id="@+id/available_button"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/twenty_five_dp"
+                android:layout_below="@id/book_info"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/sixteen_dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/golden_yellow"
+                android:focusable="false"
+                android:text="@string/available_button_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/quantity_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/book_info"
+                android:layout_marginStart="@dimen/five_dp"
+                android:layout_marginTop="@dimen/six_dp"
+                android:layout_marginEnd="@dimen/sixteen_dp"
+                android:layout_toStartOf="@id/available_button"
+                android:hint="@string/quantity_available_text"
+                android:textColor="@color/golden_yellow"
+                android:textSize="@dimen/twenty_eight_sp" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

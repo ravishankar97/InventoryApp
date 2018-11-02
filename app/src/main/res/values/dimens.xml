@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="twenty_five_sp">25sp</dimen>
+    <dimen name="eighteen_sp">18sp</dimen>
+    <dimen name="sixteen_dp">16dp</dimen>
+    <dimen name="sixteen_sp">16sp</dimen>
+    <dimen name="twenty_sp">20sp</dimen>
+    <dimen name="eight_dp">8dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="twenty_eight_sp">28sp</dimen>
+    <dimen name="twenty_five_dp">25dp</dimen>
+    <dimen name="thirteen_dp">13dp</dimen>
+    <dimen name="six_dp">6dp</dimen>
+</resources>

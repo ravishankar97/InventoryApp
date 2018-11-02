@@ -1,100 +1,85 @@
 package com.example.ravishankar.inventoryapp;
 
-import android.content.ContentValues;
+import android.app.LoaderManager;
+import android.content.ContentUris;
+import android.content.CursorLoader;
+import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
-import com.example.ravishankar.inventoryapp.datbasefiles.DBHelper;
-import com.example.ravishankar.inventoryapp.datbasefiles.InventoryContract.InventoryDataColumns;
+import com.example.ravishankar.inventoryapp.databasefiles.InventoryContract.InventoryDataColumns;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    Button insertButton;
-    private DBHelper mDbHelper;
+    private static final int STATIC_LOADER_INTEGER = 0;
+
+    private InventoryCursorAdapter mCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        insertButton = findViewById(R.id.button);
+        ListView listView = findViewById(R.id.list_view);
+        FloatingActionButton fab = findViewById(R.id.fab);
 
-        insertButton.setOnClickListener(new View.OnClickListener() {
+        View emptyView = findViewById(R.id.empty_view);
+        listView.setEmptyView(emptyView);
+        mCursorAdapter = new InventoryCursorAdapter(this, null);
+        listView.setAdapter(mCursorAdapter);
+        getLoaderManager().initLoader(STATIC_LOADER_INTEGER, null, this);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                insertData();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+
+                Uri currentItemUri = ContentUris.withAppendedId(InventoryDataColumns.CONTENT_URI, id);
+                intent.setData(currentItemUri);
+                startActivity(intent);
             }
         });
-        mDbHelper = new DBHelper(this);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, EditorActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        queryData();
-    }
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-    private void queryData() {
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        String[] projectionColumns = {
-                InventoryDataColumns._ID,
+        String[] projection = {InventoryDataColumns._ID,
                 InventoryDataColumns.PRODUCT_NAME,
                 InventoryDataColumns.PRICE,
-                InventoryDataColumns.QUANTITY,
                 InventoryDataColumns.SUPPLIER_NAME,
-                InventoryDataColumns.SUPPLIER_PHONE_NUMBER
-        };
+                InventoryDataColumns.SUPPLIER_PHONE_NUMBER,
+                InventoryDataColumns.QUANTITY};
 
-        Cursor resultSet = db.query(InventoryDataColumns.TABLE_NAME, projectionColumns,
-                null,
-                null,
-                null,
-                null,
-                null);
-
-        TextView textView = findViewById(R.id.textView);
-
-
-        try {
-            textView.setText("\n");
-            int idColumnIndex = resultSet.getColumnIndex(InventoryDataColumns._ID);
-            int nameColumnIndex = resultSet.getColumnIndex(InventoryDataColumns.PRODUCT_NAME);
-            int priceColumnIndex = resultSet.getColumnIndex(InventoryDataColumns.PRICE);
-            int quantityColumnIndex = resultSet.getColumnIndex(InventoryDataColumns.QUANTITY);
-            int supplierNameColumnIndex = resultSet.getColumnIndex(InventoryDataColumns.SUPPLIER_NAME);
-            int supplierPhoneColumnIndex = resultSet.getColumnIndex(InventoryDataColumns.SUPPLIER_PHONE_NUMBER);
-
-            while (resultSet.moveToNext()) {
-
-                int productID = resultSet.getInt(idColumnIndex);
-                String productName = resultSet.getString(nameColumnIndex);
-                int price = resultSet.getInt(priceColumnIndex);
-                int quantity = resultSet.getInt(quantityColumnIndex);
-                String supplierName = resultSet.getString(supplierNameColumnIndex);
-                int supplierPhoneNumber = resultSet.getInt(supplierPhoneColumnIndex);
-
-                textView.append(("\n" + productID + "-" + productName + "-" + quantity + "-" + price + "-" + supplierName + "-" + supplierPhoneNumber));
-            }
-        } finally {
-            resultSet.close();
-        }
+        return new CursorLoader(this, InventoryDataColumns.CONTENT_URI, projection, null, null, null);
     }
 
-    private void insertData() {
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(InventoryDataColumns.PRODUCT_NAME, "HarryPotter");
-        values.put(InventoryDataColumns.PRICE, 425);
-        values.put(InventoryDataColumns.QUANTITY, 23);
-        values.put(InventoryDataColumns.SUPPLIER_NAME, "J.K.Rowling");
-        values.put(InventoryDataColumns.SUPPLIER_PHONE_NUMBER, 987654321);
-        db.insert(InventoryDataColumns.TABLE_NAME, null, values);
-        queryData();
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+        mCursorAdapter.swapCursor(data);
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mCursorAdapter.swapCursor(null);
 
     }
 }
